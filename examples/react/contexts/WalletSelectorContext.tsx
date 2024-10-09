@@ -29,6 +29,7 @@ import { setupMintbaseWallet } from "@near-wallet-selector/mintbase-wallet";
 import { setupBitteWallet } from "@near-wallet-selector/bitte-wallet";
 import { setupOKXWallet } from "@near-wallet-selector/okx-wallet";
 import { setupEthereumWallets } from "@near-wallet-selector/ethereum-wallets";
+import { setupSweatWallet } from "@near-wallet-selector/sweat-wallet";
 
 import type { ReactNode } from "react";
 import React, {
@@ -53,7 +54,6 @@ import { injected, walletConnect } from "@wagmi/connectors";
 
 import { Loading } from "../components/Loading";
 import { CONTRACT_ID } from "../constants";
-
 declare global {
   interface Window {
     selector: WalletSelector;
@@ -190,6 +190,7 @@ export const WalletSelectorContextProvider: React.FC<{
         setupMintbaseWallet({ contractId: CONTRACT_ID }),
         setupBitteWallet({ contractId: CONTRACT_ID }),
         setupEthereumWallets({ wagmiConfig, web3Modal }),
+        setupSweatWallet(),
       ],
     });
     const _modal = setupModal(_selector, {

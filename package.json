@@ -26,7 +26,8 @@
     "near-mobile-wallet",
     "mintbase-wallet",
     "bitte-wallet",
-    "okx-wallet"
+    "okx-wallet",
+    "sweat-wallet"
   ],
   "homepage": "https://github.com/near/wallet-selector#README",
   "bugs": {
@@ -72,6 +73,7 @@
     "build:wallet-utils": "nx run-many --target=build --projects=wallet-utils --configuration=production",
     "build:welldone-wallet": "nx run-many --target=build --projects=welldone-wallet --configuration=production",
     "build:xdefi-wallet": "nx run-many --target=build --projects=xdefi --configuration=production",
+    "build:sweat-wallet": "nx run-many --target=build --projects=sweat-wallet --configuration=production",
     "examples:vanillajs:generateimportmap": "(cd examples/vanillajs && jspm link index.html -o index.html)",
     "find:unused": "ts-prune -p tsprune.json",
     "postinstall": "yarn build:all",
@@ -106,6 +108,7 @@
     "@noble/hashes": "1.4.0",
     "@peersyst/near-mobile-signer": "1.1.4",
     "@ramper/near": "0.0.30",
+    "@sweatco/wallet-selector": "1.0.0-alpha.0",
     "@tanstack/react-query": "5.24.8",
     "@walletconnect/modal": "2.6.2",
     "@walletconnect/sign-client": "2.13.0",
