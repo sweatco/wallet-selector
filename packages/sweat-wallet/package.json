@@ -1,0 +1,8 @@
+{
+  "name": "sweat-wallet",
+  "version": "1.0.0",
+  "description": "Sweat Wallet package for NEAR Wallet Selector.",
+  "repository": "https://github.com/near/wallet-selector.git",
+  "author": "Misha Sitalov",
+  "license": "MIT"
+}
