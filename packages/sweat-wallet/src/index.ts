@@ -3,6 +3,7 @@ import type {
     InjectedWallet,
     WalletBehaviourFactory,
     FinalExecutionOutcome,
+    SignedMessage
   } from "@near-wallet-selector/core";
 
 import icon from "./icon";
@@ -12,7 +13,7 @@ interface Options {
     iconUrl?: string
 }
 
-type SelectorInit = WalletBehaviourFactory<InjectedWallet>;
+type SweatWalletInit = WalletBehaviourFactory<InjectedWallet>;
 
 export function setupSweatWallet({
     deprecated = false,
@@ -25,9 +26,8 @@ export function setupSweatWallet({
         metadata: {
           name: "Sweat Wallet",
           description: "Mobile wallet for NEAR Protocol",
-          useUrlAccountImport: true,
+          useUrlAccountImport: false,
           downloadUrl: "https://sweateconomy.com",
-          topLevelInjected: true,
           iconUrl,
           deprecated,
           available: true,
@@ -37,32 +37,66 @@ export function setupSweatWallet({
     };
 }
 
-const initSweatWallet: SelectorInit = async (config) => {
-  // Add your implementation here
-  // Return a Promise<Omit<InjectedWallet, "id" | "type" | "metadata">>
-  return Promise.resolve({
-    signIn: async () => {
-      // Implement signIn logic here
-      return []; // Should return a Promise<Account[]>
-    },
-    signOut: async () => {
-      // Implement signOut logic here
-    },
-    getAccounts: async () => {
-      // Implement getAccounts logic here
-      return []; // Should return a Promise<Account[]>
-    },
-    verifyOwner: async () => {
-        // Implement verifyOwner logic here
+const initSweatWallet: SweatWalletInit = async (config) => {
+    const { logger } = config
+
+    return {  
+      async signIn(data) {
+        logger.log("[SweatWallet]: signIn", data);
+        const connector = createIframe("https://sweateconomy.com");
+        connector.style.display = "block"
+        return []
+      },
+  
+      async signOut() {
+        logger.log("[SweatWallet]: signOut");
         return Promise.resolve();
       },
-      signAndSendTransaction: async () => {
-        // Implement signAndSendTransaction logic here
-        return Promise.resolve({} as FinalExecutionOutcome); // Should return a Promise<FinalExecutionOutcome>
+  
+      async getAccounts() {
+        logger.log("[SweatWallet]: getAccounts");
+        return []
       },
-      signAndSendTransactions: async () => {
-        // Implement signAndSendTransactions logic here
-        return Promise.resolve([{} as FinalExecutionOutcome]); // Should return a Promise<FinalExecutionOutcome>
+  
+      async signAndSendTransaction(data) {
+        logger.log("[SweatWallet]: signAndSendTransaction", data);
+  
+        return {} as FinalExecutionOutcome;
       },
-  });
+  
+      async verifyOwner() {
+        throw Error(
+          "[SweatWallet]: verifyOwner is deprecated, use signMessage method with implementation NEP0413 Standard"
+        );
+      },
+  
+      async signMessage(data) {
+        logger.log("[SweatWallet]: signMessage", data);
+        return Promise.resolve({
+          accountId: "example-account",
+          signature: "example-signature",
+          publicKey: "example-public-key" // Ensure publicKey is included
+        } as SignedMessage);
+      },
+  
+      async signAndSendTransactions(data) {
+        logger.log("[SweatWallet]: signAndSendTransactions", data);
+        return [{} as FinalExecutionOutcome];
+      },
+    };
 }
+
+const createIframe = (widget: string) => {
+  const connector = document.createElement("iframe");
+  connector.src = widget;
+  connector.style.border = "none";
+  connector.style.zIndex = "10000";
+  connector.style.position = "fixed";
+  connector.style.display = "none";
+  connector.style.top = "0";
+  connector.style.left = "0";
+  connector.style.width = "50%";
+  connector.style.height = "50%";
+  document.body.appendChild(connector);
+  return connector;
+};
