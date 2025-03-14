@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import type { Wallet } from "@near-wallet-selector/core";
-import LoadingIcon from "../images/connecting-loader.png";
 import { ModalHeader } from "./ModalHeader";
 import { translate } from "@near-wallet-selector/core";
 
@@ -25,7 +24,10 @@ export const WalletConnecting: React.FC<WalletConnectingProps> = ({
           <h3 className="connecting-name">{wallet?.metadata.name}</h3>
           <div className="connecting-details">
             <div className="spinner">
-              <img src={LoadingIcon} alt="loading-icon" />
+              <img
+                src={require("../images/connecting-loader.png")}
+                alt="loading-icon"
+              />
             </div>
             <span>
               {translate("modal.wallet.connectingTo")} {wallet?.metadata.name}
