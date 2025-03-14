@@ -137,7 +137,7 @@
     "export": {
       "executor": "@nx/next:export",
       "options": {
-        "buildTarget": "next:build:production"
+        "buildTarget": "react:build:production"
       }
     },
     "lint": {
