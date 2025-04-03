@@ -29,6 +29,7 @@ import { setupRamperWallet } from "@near-wallet-selector/ramper-wallet";
 import { setupNearMobileWallet } from "@near-wallet-selector/near-mobile-wallet";
 import { setupMintbaseWallet } from "@near-wallet-selector/mintbase-wallet";
 import { setupBitteWallet } from "@near-wallet-selector/bitte-wallet";
+import { setupSweatWallet } from "@near-wallet-selector/sweat-wallet";
 import { CONTRACT_ID } from "../constants";
 
 declare global {
@@ -86,6 +87,7 @@ export const ExportAccountSelectorContextProvider: React.FC<{
           },
         }),
         setupNearMobileWallet(),
+        setupSweatWallet(),
       ],
     });
     /**

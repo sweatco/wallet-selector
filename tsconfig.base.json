@@ -42,6 +42,9 @@
       "@near-wallet-selector/here-wallet": [
         "packages/here-wallet/src/index.ts"
       ],
+      "@near-wallet-selector/sweat-wallet": [
+        "packages/sweat-wallet/src/index.ts"
+      ],
       "@near-wallet-selector/ledger": [
         "packages/ledger/src/index.ts"
       ],
