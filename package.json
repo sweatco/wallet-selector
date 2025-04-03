@@ -108,7 +108,7 @@
     "@noble/hashes": "1.4.0",
     "@peersyst/near-mobile-signer": "1.1.4",
     "@ramper/near": "0.0.30",
-    "@sweatco/wallet-selector": "1.0.0-alpha.0",
+    "@sweatco/wallet-selector": "1.0.0-alpha.3",
     "@tanstack/react-query": "5.24.8",
     "@walletconnect/modal": "2.6.2",
     "@walletconnect/sign-client": "2.13.0",
